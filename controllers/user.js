@@ -19,3 +19,17 @@ exports.saveUser=(req,res,next)=>{
     })
     .catch(err=> console.log(err));
 }
+
+exports.checkEmail = async (req, res, next) => {
+    const email = req.params.email;
+    try {
+      const existingUser = await User.findOne({ email: email });
+      if (existingUser) {
+        res.json({ exists: true });
+      } else {
+        res.json({ exists: false });
+      }
+    } catch (err) {
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  }

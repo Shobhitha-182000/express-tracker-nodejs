@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>signup Form</title>
+  <title>Signup Form</title>
+  <link rel="stylesheet" href="/css/signup.css">
   <style>
     body {
     font-family: Arial, sans-serif;
@@ -61,23 +62,20 @@
     background-color: #45a049;
   }
   
-    
   </style>
-
-  
 </head>
 <body>
   <div class="container">
-    <form id="loginForm"   action="/user/signup" method="post">
-      <!-- //onsubmit="return validateForm()" -->
+    <form id="signupForm" action="/user/signup" method="post">
       <h2>Sign-up</h2>
       <div class="form-group">
-        <label for="name">Username</label>
-        <input type="text" id="username" name="name" required>
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
       </div>
       <div class="form-group">
         <label for="email">Email</label>
         <input type="email" id="email" name="email" required>
+        <small id="emailError" style="color: red; display: none;">This email address is already registered.</small>
       </div>
       <div class="form-group">
         <label for="password">Password</label>
@@ -87,18 +85,22 @@
     </form>
   </div>
 
-  <script > 
-   function validateForm() {
-    const username = document.getElementById('username').value;
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-  
-    if (username.trim() === '' || email.trim() === '' || password.trim() === '') {
-      alert('All fields are mandatory!');
-      return false;
-    }
-    return true;
-  } 
-</script>
+  <script>
+    const signupForm = document.getElementById('signupForm');
+    const emailInput = document.getElementById('email');
+    const emailError = document.getElementById('emailError');
+
+    signupForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const email = emailInput.value;
+      const response = await fetch(`/user/${encodeURIComponent(email)}`);
+      const data = await response.json();
+      if (data.exists) {
+        emailError.style.display = 'block';
+      } else {
+        signupForm.submit();
+      }
+    });
+  </script>
 </body>
 </html>

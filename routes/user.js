@@ -4,6 +4,7 @@ const route=express.Router();
 
 route.get('/signup',userController.getSignupForm);
 route.post('/signup',userController.saveUser);
+route.get('/:email',userController.checkEmail);
 
 
 
