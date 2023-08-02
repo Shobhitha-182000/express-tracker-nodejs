@@ -1,11 +1,15 @@
-const express=require('express');
-const userController=require('../controllers/user');
-const route=express.Router();
+const express = require("express");
+const userController = require("../controllers/user");
+const router = express.Router();
 
-route.get('/signup',userController.getSignupForm);
-route.post('/signup',userController.saveUser);
-route.get('/:email',userController.checkEmail);
+router.get("/signup", userController.getSignupForm);
 
+router.post("/signup", userController.saveUser);
 
+router.get("/signup/:email", userController.checkEmail);
 
-module.exports=route;
+router.get("/login", userController.getLoginPage);
+
+router.get("/login-page/:email/:password", userController.login);
+
+module.exports = router;

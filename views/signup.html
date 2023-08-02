@@ -61,7 +61,6 @@
   button:hover {
     background-color: #45a049;
   }
-  
   </style>
 </head>
 <body>
@@ -93,12 +92,13 @@
     signupForm.addEventListener('submit', async (event) => {
       event.preventDefault();
       const email = emailInput.value;
-      const response = await fetch(`/user/${encodeURIComponent(email)}`);
+      const response = await fetch(`/user/signup/${encodeURIComponent(email)}`);
       const data = await response.json();
       if (data.exists) {
         emailError.style.display = 'block';
       } else {
-        signupForm.submit();
+        emailError.style.display = 'none'; // Hide the error message if email is unique
+        signupForm.submit(); // Proceed with form submission if email is unique
       }
     });
   </script>
