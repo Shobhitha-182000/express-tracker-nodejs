@@ -10,6 +10,6 @@ router.get("/signup/:email", userController.checkEmail);
 
 router.get("/login", userController.getLoginPage);
 
-router.get("/login-page/:email/:password", userController.login);
+router.post("/login", userController.login);
 
 module.exports = router;

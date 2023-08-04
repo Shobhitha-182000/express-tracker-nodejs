@@ -3,36 +3,69 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Page</title>
   <link rel="stylesheet" href="/css/login.css">
+  <title>Login</title>
 </head>
 <body>
   <div class="container">
-    <form id="loginForm"   action="/user/login-page" method="get">
+    <form id="loginForm" action="/user/login" method="post">
       <h2>Login</h2>
       <div class="form-group">
-        <label for="email">User email</label>
-        <input type="email" id="username" name="email" required>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
       </div>
       <div class="form-group">
         <label for="password">Password</label>
         <input type="password" id="password" name="password" required>
       </div>
       <button type="submit">Login</button>
-    </form>
+    </form><br>
+    <a href="/user/signup">new user Register here</a>
   </div>
 
   <script>
-    // function validateForm() {
-    //   const username = document.getElementById('username').value;
-    //   const password = document.getElementById('password').value;
+    const loginForm = document.getElementById('loginForm');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
 
-    //   if (username.trim() === '' || password.trim() === '') {
-    //     alert('Both username and password are required!');
-    //     return false;
-    //   }
-    //   return true;
-    // }
+    loginForm.addEventListener('submit', async  (event) => {
+      event.preventDefault();
+
+      const email = emailInput.value;
+      const password = passwordInput.value;
+      console.log(email,password);
+
+      // Basic validation checks
+      if (!email.trim() || !password.trim()) {
+        alert('Please enter both email and password.');
+        return;
+      }
+      try{
+      const response = await fetch(`/user/login`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email, password })
+        });
+         
+        const user = await response.json();
+        console.log('user email '+email);
+            console.log('entered email '+email);
+            // const data = await response.json();
+        console.log(user.exists);
+
+        if (user.exists) {   
+          alert('Login Successfully');
+          loginForm.submit();
+        } else {
+          alert('Email or password is not macthing');
+        }
+        } catch (error) {
+        console.error('Error during login:', error);
+        alert('An error occurred during login. Please try again later.');
+        }
+    });
   </script>
 </body>
 </html>

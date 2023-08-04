@@ -41,19 +41,25 @@ exports.getLoginPage = (req, res, next) => {
   res.sendFile(path.join(__dirname, "..", "views", "login.html"));
 };
 
-exports.login=async (req,res,next)=>{
-    const email = req.params.email;
-    const password = req.params.password; 
-    try{
-        const existingUser = await User.findOne({ where: { email: email } });
-        console.log(existingUser);
-        if(existingUser){
-            if(existingUser.password===password){
-               return res.redirect('/user/signup');
-            }
-        }
-        return res.send('<h1>Not found</h1>');
-    }catch(err){
-        return res.status(404).json({message:'user not exits' });
+exports.login = async (req, res, next) => {
+    
+const email = req.body.email;
+  const password = req.body.password;
+  console.log(email);
+  console.log("entered password " + password);
+  try {
+    const user = await User.findOne({ where: { email: email } });
+    console.log("user password " + user.password);
+    if (!user) {
+      return res.json({ exists: false, message: "User not found" });
     }
+    if (user.password === password) {
+      return res.json({ exists: true, data: user });
+    } else {
+      return res.status(401).json({ exists: false, message: "Incorrect password" });
+    }
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
 }
