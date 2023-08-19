@@ -4,12 +4,15 @@ const bodyParser=require('body-parser');
 const sequelize = require('./util/database');
 const user = require('./models/user');
 const userRouter=require('./routes/user');
+const expense = require('./models/expense');
+const expenseRouter=require('./routes/expense');
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
 app.use(express.static('public'));
   
 app.use('/user',userRouter);
+app.use(expenseRouter);
 sequelize.sync()
 .then(result=>{
     app.listen(3000,()=>{

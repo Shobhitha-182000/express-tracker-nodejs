@@ -58,7 +58,8 @@ exports.login = async (req, res, next) => {
         throw new error('Something went wrong')
       }
       if (result === true) {
-        return res.json({ exists: true, message: 'loggin Successfully' });
+         return res.json({ exists: true, message: 'loggin Successfully' });
+          // return res.sendFile(path.join(__dirname, "..", "views", "expense.html"));
       } else {
         return res.status(401).json({ exists: false, message: "Incorrect password" });
       }

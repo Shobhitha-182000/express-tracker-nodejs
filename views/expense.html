@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href=" /css/expense.css">
+  <title>Expense Tracker</title>
+   
+</head>
+<body>
+  <div class="form-container">
+    <h1>Expense Tracker</h1>
+    <form action="/expense" onsubmit="saveExpnese()" method="POST" >
+      <table>
+        <tr>
+          <td><label for="amount">Amount Spent:</label></td>
+          <td><input type="number" id="amount" name="amount" required></td>
+        </tr>
+        <tr>
+          <td><label for="description">Expense Description:</label></td>
+          <td><input type="text" id="description" name="description" required></td>
+        </tr>
+        <tr>
+          <td><label for="category">Category:</label></td>
+          <td>
+            <select id="category" name="category">
+              <option value="food">Food</option>
+              <option value="petrol">Petrol</option>
+              <option value="salary">Salary</option>
+              <!-- Add more options as needed -->
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2"><button onclick="saveExpnese" type="submit">Submit Expense</button></td>
+        </tr>
+      </table>
+      <ul class="list-group"></ul>
+    </form>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+        function saveExpnese(event){
+        
+            console.log('saved....')
+            const ul=document.getElementsByClassName('.list-group');
+            const container=document.getElementsByClassName('form-container');
+
+            const response=fetch('/expnese');
+            const data =response.json();
+            console.log(data);
+            fetch('/expnese')
+            .then(response=>response.json())
+            .then(expense=>{
+
+            })
+            .catch(err=>{
+                console.log('error found');
+            })
+
+        }
+        // axios.get('/expense/all-expense')
+        //         .then(response => {
+        //             let expenses = response.data;
+
+        //             let ul = document.createElement('ul');
+        //             ul.className = "list-group";
+        //             ul.style.width = '35rem';
+
+        //             expenses.forEach(expense => {
+        //                 let li = document.createElement('li');
+        //                 li.className = 'list-group-item';
+        //                 li.style.backgroundColor = 'rgb(206, 97, 58)';
+        //                 li.style.width = '35rem';
+
+        //                 let edit = document.createElement('button');
+        //                 edit.className = "btn btn-primary";
+        //                 edit.textContent = 'edit';
+
+        //                 let deleteBtn = document.createElement('button');
+        //                 deleteBtn.className = "btn btn-danger";
+        //                 deleteBtn.textContent = 'delete';
+
+        //                 let n = `${expense.id} - ${expense.amount} - ${expense.description} - ${expense.category}`;
+        //                 li.textContent = n;
+
+        //                 li.appendChild(edit);
+        //                 li.appendChild(deleteBtn);
+        //                 ul.appendChild(li);
+        //                 container.appendChild(ul);
+
+        //                 var deleteUrl = '/expense/delete-expense/' + expense.id;
+        //                 var updatedUrl = '/expense/edit-expense/' + expense.id;
+
+        //                 deleteBtn.addEventListener("click", function (event) {
+        //                     event.preventDefault();
+        //                     axios.delete(deleteUrl)
+        //                         .then(response => {
+        //                             console.log('deleted');
+        //                             ul.removeChild(li);
+        //                             console.log('Expense deleted successfully:', response.data);
+        //                         })
+        //                         .catch(err => console.log(err));
+        //                 });
+
+        //                 edit.addEventListener('click', function (event) {
+        //                     event.preventDefault();
+        //                     let updateAmount = prompt("Enter updated amount:", expense.amount);
+        //                     let updatedDescription = prompt("Enter updated description:", expense.description);
+        //                     let updatedCategory = prompt("Enter updated category:", expense.category);
+
+        //                     let updatedUserData = {
+        //                         amount: updateAmount,
+        //                         description: updatedDescription,
+        //                         category: updatedCategory
+        //                     }
+
+        //                     axios.put(updatedUrl, updatedUserData)
+        //                         .then(response => {
+        //                             let updatedInput = `${expense.id} - ${updateAmount} - ${updatedDescription} - ${updatedCategory}`;
+        //                             li.textContent = updatedInput;
+        //                             li.appendChild(edit);
+        //                             li.appendChild(deleteBtn);
+        //                             ul.appendChild(li);
+        //                             console.log('Expense updated successfully:', response.data);
+        //                         })
+        //                         .catch(err => console.log(err));
+        //                 });
+        //             });
+        //         })
+        //         .catch(err => console.log(err));
+        // }
+  </script>
+</body>
+</html>
