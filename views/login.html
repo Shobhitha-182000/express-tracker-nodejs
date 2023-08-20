@@ -56,7 +56,8 @@
 
         if (user.exists) {   
           alert('Login Successfully');
-          window.location.href = '/expense';
+          localStorage.setItem('token',user.token);
+          // window.location.href = '/expense';
           // loginForm.submit();
         } else {
           alert('Email or password is not macthing');

@@ -10,6 +10,9 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
 app.use(express.static('public'));
+
+// user.hasMany(expense);
+// expense.belongsTo(user);
   
 app.use('/user',userRouter);
 app.use(expenseRouter);
