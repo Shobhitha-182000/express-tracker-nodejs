@@ -1,133 +1,142 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/expense.css" />
+    <title>Expense Tracker</title>
+  </head>
+  <body>
+    <div id="container">
+      <form action="/expense" method="post">
+        <div class="col-md-10">
+          <label for="amount" class="form-label"
+            >Choose an Expense Amount</label
+          >
+          <input
+            type="number"
+            id="number"
+            name="amount"
+            class="form-control"
+            placeholder="Choose an expense"
+          />
+        </div>
+        <br />
+        <div class="mb-3">
+          <label for="description" class="form-label"
+            >Enter the Description:</label
+          >
+          <input
+            type="text"
+            id="textInput"
+            name="description"
+            class="form-control"
+            placeholder="Enter the Description"
+          />
+        </div>
+        <div>
+          <label for="category" class="form-label">Choose a category:</label>
+          <select id="category" name="category" class="form-control">
+            <option value="food">Food</option>
+            <option value="petrol">Petrol</option>
+            <option value="salary">salary</option>
+          </select>
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary" id="button">
+          Add Expenses
+        </button>
+        <div id="container1"></div>
+      </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./expense.js">
+       
+    </script>
+  </body>
+</html> -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" href=" /css/expense.css">
-  <title>Expense Tracker</title>
-   
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/expense.css">
+    <title>Expense Tracker</title>
 </head>
 <body>
-  <div class="form-container">
-    <h1>Expense Tracker</h1>
-    <form action="/expense" onsubmit="saveExpnese()" method="POST" >
-      <table>
-        <tr>
-          <td><label for="amount">Amount Spent:</label></td>
-          <td><input type="number" id="amount" name="amount" required></td>
-        </tr>
-        <tr>
-          <td><label for="description">Expense Description:</label></td>
-          <td><input type="text" id="description" name="description" required></td>
-        </tr>
-        <tr>
-          <td><label for="category">Category:</label></td>
-          <td>
-            <select id="category" name="category">
-              <option value="food">Food</option>
-              <option value="petrol">Petrol</option>
-              <option value="salary">Salary</option>
-              <!-- Add more options as needed -->
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2"><button onclick="saveExpnese" type="submit">Submit Expense</button></td>
-        </tr>
-      </table>
-      <ul class="list-group"></ul>
-    </form>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script>
-        function saveExpnese(event){
-        
-            console.log('saved....')
-            const ul=document.getElementsByClassName('.list-group');
-            const container=document.getElementsByClassName('form-container');
+    <div id="container">
+        <form action="/expense" method="post">
+            <div class="mb-3">
+                <label for="amount" class="form-label">Choose an Expense Amount</label>
+                <input type="number" id="number" name="amount" class="form-control" placeholder="Choose an expense">
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Enter the Description:</label>
+                <input type="text" id="textInput" name="description" class="form-control" placeholder="Enter the Description">
+            </div>
+            <div class="mb-3">
+                <label for="category" class="form-label">Choose a category:</label>
+                <select id="category" name="category" class="form-select">
+                    <option value="food">Food</option>
+                    <option value="petrol">Petrol</option>
+                    <option value="salary">Salary</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary" id="button">Add Expenses</button>
+        </form>
+        <div id="container1">
+             
+        </div>
+    </div>
 
-            const response=fetch('/expnese');
-            const data =response.json();
-            console.log(data);
-            fetch('/expnese')
-            .then(response=>response.json())
-            .then(expense=>{
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        let container = document.getElementById("container1");
+      container.innerHTML = ""; // Clear the container before adding expenses
 
-            })
-            .catch(err=>{
-                console.log('error found');
-            })
+      axios
+        .get("/get-all-expense")
+        .then((response) => {
+          let expenses = response.data;
 
-        }
-        // axios.get('/expense/all-expense')
-        //         .then(response => {
-        //             let expenses = response.data;
+          let ul = document.createElement("ul");
+          ul.className = "list-group";
 
-        //             let ul = document.createElement('ul');
-        //             ul.className = "list-group";
-        //             ul.style.width = '35rem';
+          expenses.forEach((expense) => {
+            let li = document.createElement("li");
+            li.className = "list-group-item";
 
-        //             expenses.forEach(expense => {
-        //                 let li = document.createElement('li');
-        //                 li.className = 'list-group-item';
-        //                 li.style.backgroundColor = 'rgb(206, 97, 58)';
-        //                 li.style.width = '35rem';
+            let deleteBtn = document.createElement("button");
+            deleteBtn.className = "btn btn-danger";
+            deleteBtn.textContent = "delete";
 
-        //                 let edit = document.createElement('button');
-        //                 edit.className = "btn btn-primary";
-        //                 edit.textContent = 'edit';
+            let n = ` ${expense.amount} - ${expense.description} - ${expense.category}`;
+            li.textContent = n;
 
-        //                 let deleteBtn = document.createElement('button');
-        //                 deleteBtn.className = "btn btn-danger";
-        //                 deleteBtn.textContent = 'delete';
+            li.appendChild(deleteBtn);
+            ul.appendChild(li);
+            container.appendChild(ul);
 
-        //                 let n = `${expense.id} - ${expense.amount} - ${expense.description} - ${expense.category}`;
-        //                 li.textContent = n;
+            var deleteUrl = "/expense/" + expense.id;
 
-        //                 li.appendChild(edit);
-        //                 li.appendChild(deleteBtn);
-        //                 ul.appendChild(li);
-        //                 container.appendChild(ul);
+            deleteBtn.addEventListener("click", function (event) {
+              event.preventDefault();
+              axios
+                .delete(deleteUrl)
+                .then((response) => {
+                  console.log("deleted");
+                  ul.removeChild(li);
+                  console.log("Expense deleted successfully:", response.data);
+                })
+                .catch((err) => console.log(err));
+            });
+          });
+        })
+        .catch((err) => console.log(err));
 
-        //                 var deleteUrl = '/expense/delete-expense/' + expense.id;
-        //                 var updatedUrl = '/expense/edit-expense/' + expense.id;
-
-        //                 deleteBtn.addEventListener("click", function (event) {
-        //                     event.preventDefault();
-        //                     axios.delete(deleteUrl)
-        //                         .then(response => {
-        //                             console.log('deleted');
-        //                             ul.removeChild(li);
-        //                             console.log('Expense deleted successfully:', response.data);
-        //                         })
-        //                         .catch(err => console.log(err));
-        //                 });
-
-        //                 edit.addEventListener('click', function (event) {
-        //                     event.preventDefault();
-        //                     let updateAmount = prompt("Enter updated amount:", expense.amount);
-        //                     let updatedDescription = prompt("Enter updated description:", expense.description);
-        //                     let updatedCategory = prompt("Enter updated category:", expense.category);
-
-        //                     let updatedUserData = {
-        //                         amount: updateAmount,
-        //                         description: updatedDescription,
-        //                         category: updatedCategory
-        //                     }
-
-        //                     axios.put(updatedUrl, updatedUserData)
-        //                         .then(response => {
-        //                             let updatedInput = `${expense.id} - ${updateAmount} - ${updatedDescription} - ${updatedCategory}`;
-        //                             li.textContent = updatedInput;
-        //                             li.appendChild(edit);
-        //                             li.appendChild(deleteBtn);
-        //                             ul.appendChild(li);
-        //                             console.log('Expense updated successfully:', response.data);
-        //                         })
-        //                         .catch(err => console.log(err));
-        //                 });
-        //             });
-        //         })
-        //         .catch(err => console.log(err));
-        // }
-  </script>
+    </script>
+    
 </body>
 </html>
