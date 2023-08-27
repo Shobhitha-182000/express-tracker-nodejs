@@ -3,26 +3,18 @@ const path = require("path");
 const bcrypt = require("bcrypt");
 const { error } = require("console");
 const jwt = require("jsonwebtoken");
+const env1=require('dotenv').config();
 
-//to hide in git 
-const fs = require('fs');
 
 // Read and parse config.json
-const configPath = 'config.json';
-const configContent = fs.readFileSync(configPath, 'utf-8');
-const config = JSON.parse(configContent);
+const secretKey = process.env.secretkey;
 
-// Access the secret key
-const secretKey = config.secretKey; // Adjust the property name if needed
-
-console.log('Secret Key:', secretKey);
+ 
 
 //to generate token
 function generateToken(id, name) {
-  return jwt.sign({ userId: id, name: name },  secretKey);
+  return jwt.sign({ userId: id, name: name }, secretKey,{ expiresIn: '1d' });
 }
-
-
 
 exports.getSignupForm = (req, res, next) => {
   res.sendFile(path.join(__dirname, "..", "views", "signup.html"));
@@ -95,3 +87,17 @@ exports.login = async (req, res, next) => {
     return res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+exports.getUserData = async (req, res) => {
+  try {
+    const user = req.user;  
+    return res.json({
+      username: user.username,
+      isPremiumUser: user.ispremiumuser,
+      
+    });
+  } catch (error) {
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+

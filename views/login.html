@@ -50,14 +50,12 @@
         });
          
         const user = await response.json();
-        console.log('user email '+email);
-            console.log('entered email '+email);
-             
-
+       
         if (user.exists) {   
           alert('Login Successfully');
           localStorage.setItem('token',user.token);
-          // window.location.href = '/expense';
+          console.log( localStorage.getItem('token'))
+          window.location.href = '/expense';
           // loginForm.submit();
         } else {
           alert('Email or password is not macthing');
