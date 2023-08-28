@@ -101,3 +101,15 @@ exports.getUserData = async (req, res) => {
   }
 };
 
+exports.getUserByUserId = (req, res) => {
+  const userId = req.params.id;
+   User.findByPk(userId)
+    .then((user) => {
+      res.json(user);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: "Internal Server Error" });
+    });
+};
+

@@ -10,6 +10,8 @@ router.post('/expense',userAuthntication, expenseController.saveExpense);
 router.get('/get-all-expense',userAuthntication,expenseController.findAll);
 
 router.delete('/expense/:id',expenseController.deleteExpense);
+
+router.get('/expense/:id',expenseController.getAllExpenseByUserId);
  
 
 module.exports = router;
