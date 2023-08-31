@@ -9,9 +9,9 @@ router.post('/expense',userAuthntication, expenseController.saveExpense);
 
 router.get('/get-all-expense',userAuthntication,expenseController.findAll);
 
-router.delete('/expense/:id',expenseController.deleteExpense);
+router.delete('/expense/:id',userAuthntication,expenseController.deleteExpense);
 
-router.get('/expense/:id',expenseController.getAllExpenseByUserId);
+router.get('/expense/:id',userAuthntication,expenseController.getAllExpenseByUserId);
  
 
 module.exports = router;

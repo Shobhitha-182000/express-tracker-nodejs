@@ -52,6 +52,8 @@
             <option value="salary">Salary</option>
           </select>
         </div>
+        <button class="btn btn-warning" id="income">Add Income</button>
+        <div id="income-list"></div>
         <button type="submit" class="btn btn-primary" id="button">
           Add Expenses
         </button>
@@ -62,22 +64,17 @@
           </p>
         </div>
         <button class="btn btn-secondary" id="leadboard">Leadboard</button>
+        <button id="download" class="btn btn-danger">download</button>
+        <div id="download"  >
+        </div>
       </form>
       <div id="container1"></div>
     </div>
     <div id="list-of-expense">
-      <!-- <table class="expense-table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Total Expense Amount</th>
-          </tr>
-        </thead>
-      </table> -->
     </div>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="./expense.js"></script>
-    <script src="./leadboard.js"></script>
+    <script src="/js/expense.js"></script>
+    <script src="/leadboard.js"></script>
   </body>
 </html>

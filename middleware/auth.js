@@ -32,6 +32,7 @@ module.exports = async (req, res, next) => {
     const user = await User.findByPk(decodedToken.userId);
 
     req.user = user;
+    console.log(req.user+'===================='); 
     next();
   } catch (err) {
     console.log(err);
