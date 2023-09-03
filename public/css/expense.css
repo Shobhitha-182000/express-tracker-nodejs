@@ -1,128 +1,12 @@
-/* styles.css
-
-body {
-  background-color: #dee9f3;
-  font-family: Arial, sans-serif;
-}
-
-#container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 100px;
-  background-color: #e0e6ec;
-  border-radius: 5px;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
-  font-weight: bold;
-  font-family: 'Times New Roman', serif;
-  font-size: large;
-}
-
-#container form {
-  margin-bottom: 20px;
-}
-
-#container h2 {
-  margin-bottom: 20px;
-}
-
-.list-group-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.btn-danger {
-  margin-left: 10px;
-}
-
-/* expense.css */
-/* body {
-  font-family: Arial, sans-serif;
-  background-color: #f5f5f5;
-  margin: 0;
-  padding: 0;
-}
-
-h1 {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.expense-table {
-  width: 80%;
-  margin: 20px auto;
-  border-collapse: collapse;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
-}
-
-.expense-table th,
-.expense-table td {
-  padding: 12px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
-.expense-table thead {
-  background-color: #333;
-  color: #fff;
-}
-
-.expense-table tbody tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-.expense-table tbody tr:hover {
-  background-color: #ddd;
-}
-
-.expense-table th {
-  background-color: #555;
-  color: #fff;
-  text-transform: uppercase;
-}
-button[type="submit"] {
-  background-color: #28A745;
-} */
-
-/* Table styles
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-}
-
-th, td {
-  padding: 10px;
-  border: 1px solid #ccc;
-  text-align: left;
-}
-
-th {
-  background-color: #007BFF;
-  color: #fff;
-} */
-    /* table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    th, td {
-        padding: 8px;
-        border: 1px solid #ccc;
-        text-align: left;
-    }
-
-    th {
-        background-color: #007BFF;
-        color: #fff;
-    }
-
-    /* Set a specific width for each column */
+/*  
     
-    body {
+    .nav-body {
       font-family: Arial, sans-serif;
-      color: black;
+      color: rgb(250, 244, 249);
+      background-image: url('./background.jpg');
+      background-size: cover; 
+      background-position: center center;  
+      background-repeat: inherit;
       margin: 0;
     }
     
@@ -141,6 +25,8 @@ th {
     
     #rzpy-btn{
       margin-right: 5px;
+      
+      background-color: none;
     }
     
     .input-section label {
@@ -148,29 +34,29 @@ th {
       margin-right: 10px;
     }
     .main-selection{
-      width: 50%;
-      padding: 8px;
+      width: 40%;
+      padding: 4px;
       margin-bottom: 10px;
       border-radius: 5px;
       border: 1px solid #ccc;
     }
      input[type='number']{
-      width: 50%;
-      padding: 8px;
-      margin-bottom: 10px;
+      width: 40%;
+      padding: 4px;
+      margin-bottom: 5px;
       border-radius: 5px;
       border: 1px solid #ccc;
-    }
+    }z
      input[type='text'] {
       width: 50%;
-      padding: 8px;
+      padding: 4px;
       margin-bottom: 10px;
       border-radius: 5px;
       border: 1px solid #ccc;
     }
     .expenses-list {
       margin: 20px;
-      color: rgb(25, 25, 47);
+      color:white;
     }
     
     .edit{
@@ -178,3 +64,36 @@ th {
     }
     
     
+.expense-table {
+  width: 80%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.expense-table th,
+.expense-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.expense-table thead {
+  background-color: #d10995;
+  color: #fff;
+}
+
+.expense-table tbody tr:nth-child(even) {
+  background-color: #e29aca;
+}
+
+.expense-table tbody tr:hover {
+  background-color: #ddd;
+}
+
+.expense-table th {
+  background-color: #555;
+  color: #fff;
+  text-transform: uppercase;
+} */

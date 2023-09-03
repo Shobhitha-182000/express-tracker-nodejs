@@ -1,169 +1,3 @@
-// let container = document.getElementById("container1");
-// let income = document.getElementById("income");
-// container.innerHTML = `
-// <table border="1">
-//   <thead>
-//     <tr>
-//       <th>Amount</th>
-//       <th>Desription</th>
-//       <th>Category</th>
-//       <th>Delete</th>
-//     </tr>
-//   </thead>
-//   <tbody id="tbody-list">
-
-//   </tbody>
-// </table>`;
-// let tbody1= document.getElementById("tbody-list");
-
-// const form = document.querySelector("form");
-// form.addEventListener("submit", function (event) {
-//   event.preventDefault();
-
-//   const amount = document.getElementById("amount").value;
-//   const description = document.getElementById("description").value;
-//   const category = document.getElementById("category").value;
-
-//   const data = {
-//     amount: amount,
-//     description: description,
-//     category: category,
-//   };
-//   let token = localStorage.getItem("token");
-//   axios
-//     .post("/expense", data, { headers: { Authorization: token } }) // Modify the URL endpoint according to your API route
-//     .then((response) => {
-//       console.log("Expense added successfully:");
-//       // You can update the UI or take other actions as needed
-//     })
-//     .catch((error) => {
-//       console.error("Error adding expense:", error);
-//       // Handle errors and show error messages if needed
-//     });
-// });
-
-// let token = localStorage.getItem("token");
-// axios
-//   .get("/get-all-expense", { headers: { Authorization: token } })
-//   .then((response) => {
-//     let expenses = response.data;
-
-//     expenses.forEach((expense) => {
-//       let row = document.createElement("tr");
-//       let amountTd= document.createElement("td");
-//       let descriptionTd= document.createElement("td");
-//       let categoryTd= document.createElement("td");
-//       let deleteBtnTd= document.createElement("td");
-
-//       let deleteBtn = document.createElement("button");
-//       deleteBtn.className = "btn btn-danger";
-//       deleteBtn.textContent = "delete";
-
-//       amountTd.textContent = `${expense.amount}`;
-//       descriptionTd.textContent = `${expense.description}`;
-//       categoryTd.textContent = `${expense.category}`;
-//       deleteBtnTd.appendChild(deleteBtn);
-
-//       row.appendChild(amountTd);
-//       row.appendChild(descriptionTd);
-//       row.appendChild(categoryTd);
-//       row.appendChild(deleteBtnTd);
-//       tbody1.appendChild(row);
-//       container.appendChild(tbody1);
-
-//       var deleteUrl = "/expense/" + expense.id;
-
-//       deleteBtn.addEventListener("click", function (event) {
-//         event.preventDefault();
-//         axios
-//           .delete(deleteUrl, { headers: { Authorization: token } })
-//           .then((response) => {
-//             console.log("deleted");
-//             tbody1.removeChild(row);
-//             console.log("Expense deleted successfully:", response.data);
-//           })
-//           .catch((err) => console.log(err));
-//       });
-//     });
-//   })
-//   .catch((err) => console.log(err));
-
-// document.addEventListener("DOMContentLoaded", async () => {
-//   const token = localStorage.getItem("token");
-//   try {
-//     const response = await axios.get("/user/get-user", {
-//       headers: { Authorization: token },
-//     });
-
-//     const isPremiumUser = response.data.isPremiumUser;
-//     const buyPremier = document.getElementById("buyPremier");
-//     const buyButton = document.getElementById("buyButton");
-//     const primeMessage = document.getElementById("primeMessage");
-//     const download = document.getElementById("reports");
-//     if (isPremiumUser) {
-//       buyButton.style.display = "none";
-//       primeMessage.style.display = "block";
-//       download.style.display = "block";
-//     } else {
-//       buyButton.style.display = "block"; // Display the "Buy Premium" button
-//       primeMessage.style.display = "none";
-//       download.style.display = "none";
-//     }
-
-//     buyButton.addEventListener("click", async (e) => {
-//       const token = localStorage.getItem("token");
-//       const response = await axios.get("/purchase/premiummembership", {
-//         headers: { Authorization: token },
-//       });
-//       const options = {
-//         key: response.data.key_id,
-//         order_id: response.data.order.id,
-//         handler: async function (response) {
-//           try {
-//             const updateResponse = await axios.post(
-//               "/purchase/updatetransaction",
-//               {
-//                 orderid: options.order_id,
-//                 paymentid: response.razorpay_payment_id,
-//               },
-//               { headers: { Authorization: token } }
-//             );
-
-//             localStorage.setItem("isPremiumeUser", "true");
-//             buyButton.style.display = "none";
-//             primeMessage.style.display = "block";
-
-//             alert("Payment Successful! You are now a Prime Member.");
-//           } catch (error) {
-//             console.error(error);
-//             alert("Something went wrong with the payment.");
-//           }
-//         },
-//       };
-//       const rzp1 = new Razorpay(options);
-//       rzp1.open();
-//       e.preventDefault();
-//     });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// });
-
-// //income button
-// income.addEventListener("click", (event) => {
-//   event.preventDefault();
-//   let incomeContainer = document.getElementById("income-list");
-//   incomeContainer.innerHTML = `  <label for="incomeamount" class="form-label">Enter an income Amount</label>
-//                             <input
-//                               type="number"
-//                               id="incomeamount"
-//                               name="amount"
-//                               class="form-control"
-//                               placeholder="Choose an amount"
-//                             />`;
-//   container.appendChild(incomeContainer);
-//   // console.log("income");
-// });
 
 var rzpybtn = document.getElementById("rzpy-btn");
 var addBtn = document.getElementById("add-btn");
@@ -202,7 +36,6 @@ async function downloadFiles(e) {
     headers: { Authorization: token },
   });
   if(res.data.message){
-    console.log('success')
     if (res.status === 200) {
       var a = document.createElement("a");
       a.href = res.data.fileUrl;
@@ -214,13 +47,12 @@ async function downloadFiles(e) {
   }else{
     alert('You cannot download the file only prime user can download');
   }
-  
+
 }
 
 async function addExpense(e) {
   e.preventDefault();
   try {
-    console.log("expense");
     const token = localStorage.getItem("token");
     const amount = document.getElementById("amount").value;
     const description = document.getElementById("description").value;
@@ -279,7 +111,7 @@ async function premiumMemberShip(e) {
   });
   if (res1.data.ispremiumuser) {
     rzpybtn.innerHTML = "Your are Premium user !! ";
-    rzpybtn.style.backgroundColor='red';
+    rzpybtn.style.backgroundColor=' rgb(212, 12, 179)';
     reportsLink.removeAttribute("onclick");
     leaderboardLink.removeAttribute("onclick");
     leaderboardLink.setAttribute("href", "/reports/getLeaderboardPage");
@@ -293,8 +125,8 @@ async function premiumMemberShip(e) {
         { headers: { Authorization: token } }
       );
       var options = {
-        key: response.data.key_id, // Enter the Key ID generated from the Dashboard
-        order_id: response.data.order.id, // For one time payment
+        key: response.data.key_id, 
+        order_id: response.data.order.id,  
     
         handler: async function (response) {
           console.log(response);
@@ -311,7 +143,7 @@ async function premiumMemberShip(e) {
           alert(
             "Welcome to our Premium Membership, You have now Excess to Reports and LeaderBoard"
           );
-          // window.location.reload();
+          window.location.reload();
           localStorage.setItem("token", res.data.token);
           
         },
@@ -323,22 +155,6 @@ async function premiumMemberShip(e) {
     
   }
 }
-
-// async function isPremiumUser() {
-//   const token = localStorage.getItem("token");
-//   const res = await axios.get("http://localhost:3000/user/isPremiumUser", {
-//     headers: { Authorization: token },
-//   });
-//   if (res.data.ispremiumuser) {
-//     console.log(res.data.ispremiumuser+'==========ispremium============')
-//     rzpybtn.innerHTML = "Premium Member &#128081";
-//     reportsLink.removeAttribute("onclick");
-//     leaderboardLink.removeAttribute("onclick");
-//     leaderboardLink.setAttribute("href", "/reports/getLeaderboardPage");
-//     reportsLink.setAttribute("href", "/reports/getReportsPage");
-//     rzpybtn.removeEventListener("click", premiumMemberShip);
-//   }
-// }
 
 async function getAllExpenses(e) {
   try {
@@ -519,4 +335,3 @@ document.addEventListener("DOMContentLoaded", getAllExpenses);
 document.addEventListener("DOMContentLoaded", premiumMemberShip);
 table.addEventListener("click", editExpense);
 table.addEventListener("click", deleteExpense);
-// document.addEventListener("DOMContentLoaded", isPremiumUser);
