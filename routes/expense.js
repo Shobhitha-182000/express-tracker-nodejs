@@ -1,17 +1,19 @@
 const express = require("express");
 const router = express.Router();
 const expenseController = require("../controllers/expense");
-const userAuthntication=require('../middleware/auth');
+const userAuthentication=require('../middleware/auth');
 
-router.get("/expense" , expenseController.getExpenseForm);
+router.get('/expense', expenseController.getMainPage);
 
-router.post('/expense',userAuthntication, expenseController.saveExpense);
+router.get("/expense/getAllExpenses", userAuthentication, expenseController.getAllExpenses);
 
-router.get('/get-all-expense',userAuthntication,expenseController.findAll);
+router.delete("/expense/:id", userAuthentication,expenseController.deleteExpense);
 
-router.delete('/expense/:id',userAuthntication,expenseController.deleteExpense);
+router.get('/expense/getAllExpenses/:page/:limit', userAuthentication, expenseController.getAllExpensesforPagination);
+// router.post("/editExpense/:id", userAuthentication,expenseController.editExpense);
+router.get('/expense/download', userAuthentication, expenseController.downloadExpenses);
 
-router.get('/expense/:id',userAuthntication,expenseController.getAllExpenseByUserId);
+router.post("/expense", userAuthentication,expenseController.addExpense);
  
 
 module.exports = router;

@@ -18,4 +18,6 @@ router.get('/get-user',authntication,userController.getUserData);
 
 router.get('/:id',userController.getUserByUserId)
 
+ 
+
 module.exports = router;

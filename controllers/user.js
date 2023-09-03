@@ -12,6 +12,10 @@ const secretKey = process.env.secretkey;
  
 
 //to generate token
+exports.generateToken=(id, name)=> {
+  return jwt.sign({ userId: id, name: name }, secretKey,{ expiresIn: '1d' });
+}
+
 function generateToken(id, name) {
   return jwt.sign({ userId: id, name: name }, secretKey,{ expiresIn: '1d' });
 }
@@ -56,6 +60,13 @@ exports.checkEmail = async (req, res, next) => {
 
 exports.getLoginPage = (req, res, next) => {
   res.sendFile(path.join(__dirname, "..", "views", "login.html"));
+};
+
+exports.isPremiumUser = (req, res, next) => {
+  if (req.user.ispremiumuser) {
+    return res.json({ ispremiumuser: true });
+  }
+   
 };
 
 exports.login = async (req, res, next) => {

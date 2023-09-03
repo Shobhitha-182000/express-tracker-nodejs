@@ -13,6 +13,9 @@ const leaderBoardRouter=require('./routes/leaderboard');
 const forgotpasswordRoutes=require('./routes/forgotpassword');
 const { leaderBoard } = require('./controllers/leaderboard');
 const forgotPassword = require('./models/ForgotPasswordRequests');
+const reportsRouter=require('./routes/reports');
+const premiumRoutes=require('./routes/premiumRoutes');
+const filedownload = require('./models/filedownload');
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
@@ -27,12 +30,16 @@ orders.belongsTo(user);
 
 user.hasMany(forgotPassword);
 forgotPassword.belongsTo(user);
+ 
+user.hasMany(filedownload);
+filedownload.belongsTo(user);
   
 app.use('/user',userRouter);
 app.use(expenseRouter);
 app.use('/purchase',purchaseRoutes);
-app.use('/premium',leaderBoard);
+app.use('/premium',premiumRoutes);
 app.use('/password',forgotpasswordRoutes)
+app.use('/reports', reportsRouter);
 
 sequelize.sync()
 .then(result=>{
